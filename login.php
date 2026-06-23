@@ -36,13 +36,13 @@
         <div class="flipper">
             
             <!-- CARA FRONTAL: LOGIN -->
-            <div class="front glass-panel p-8 flex flex-col items-center justify-center">
-                <div class="w-24 h-24 mb-6 rounded-full bg-[rgba(63,163,180,0.1)] border border-[var(--color-border)] flex items-center justify-center p-3 overflow-hidden">
+            <div class="front glass-panel p-6 md:p-8 flex flex-col items-center justify-center">
+                <div class="w-20 h-20 md:w-24 md:h-24 mb-4 md:mb-6 rounded-full bg-[rgba(63,163,180,0.1)] border border-[var(--color-border)] flex items-center justify-center p-3 overflow-hidden">
                     <img src="images/zorroicon.png" alt="Zorro Logo" class="w-full h-full object-contain drop-shadow-md">
                 </div>
                 
-                <h2 class="text-2xl font-semibold tracking-wide text-white mb-2">Bienvenido</h2>
-                <p class="text-sm opacity-70 mb-8 text-center">Inicia sesión en el Sistema de Incidencias</p>
+                <h2 class="text-xl md:text-2xl font-semibold tracking-wide text-white mb-1 md:mb-2">Bienvenido</h2>
+                <p class="text-xs md:text-sm opacity-70 mb-4 md:mb-8 text-center">Inicia sesión en el Sistema de Incidencias</p>
 
                 <form id="loginForm" class="w-full flex flex-col gap-4">
                     <div class="flex flex-col gap-1.5 relative">
@@ -74,19 +74,19 @@
                     </button>
                 </form>
 
-                <div class="mt-8 text-sm opacity-80 text-center">
+                <div class="mt-6 md:mt-8 text-sm opacity-80 text-center">
                     ¿No tienes cuenta? <span class="text-link font-medium" onclick="toggleFlip()">Regístrate aquí</span>
                 </div>
             </div>
 
             <!-- CARA TRASERA: REGISTRO -->
-            <div class="back glass-panel p-8 flex flex-col items-center justify-center">
-                <div class="w-20 h-20 mb-4 rounded-full bg-[rgba(63,163,180,0.1)] border border-[var(--color-border)] flex items-center justify-center p-2 overflow-hidden">
+            <div class="back glass-panel p-6 md:p-8 flex flex-col items-center justify-center">
+                <div class="w-16 h-16 md:w-20 md:h-20 mb-2 md:mb-4 rounded-full bg-[rgba(63,163,180,0.1)] border border-[var(--color-border)] flex items-center justify-center p-2 overflow-hidden">
                     <img src="images/zorroicon.png" alt="Zorro Logo" class="w-full h-full object-contain">
                 </div>
 
-                <h2 class="text-xl font-semibold tracking-wide text-[var(--color-accent)] mb-1">Crea tu cuenta</h2>
-                <p class="text-xs opacity-70 mb-6 text-center">Únete al sistema de gestión escolar</p>
+                <h2 class="text-lg md:text-xl font-semibold tracking-wide text-[var(--color-accent)] mb-0.5 md:mb-1">Crea tu cuenta</h2>
+                <p class="text-[11px] md:text-xs opacity-70 mb-3 md:mb-6 text-center">Únete al sistema de gestión escolar</p>
 
                 <!-- El form de registro enviaría a registrar.php o similar -->
                 <form id="registerForm" class="w-full flex flex-col gap-3">
@@ -133,7 +133,7 @@
                     </button>
                 </form>
 
-                <div class="mt-6 text-sm opacity-80 text-center">
+                <div class="mt-4 md:mt-6 text-sm opacity-80 text-center">
                     ¿Ya tienes cuenta? <span class="text-link font-medium" onclick="toggleFlip()">Inicia Sesión</span>
                 </div>
             </div>

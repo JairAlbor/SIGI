@@ -1,5 +1,5 @@
 body {
-    background-image: url('../images/fondo.jpg');
+    background-image: linear-gradient(var(--color-prim), var(--color-prim)), url('../images/fondo.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -7,7 +7,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow-y: auto; /* Permite scroll si la pantalla es muy corta */
 }
 
 .glass-panel {
@@ -19,7 +19,7 @@ body {
     perspective: 1200px;
     width: 100%;
     max-width: 420px;
-    height: 600px; /* Altura fija para albergar ambos formularios */
+    height: 560px; /* Altura compactada para móviles */
 }
 
 .flipper {

@@ -1,9 +1,21 @@
+:root {
+    --color-prim: rgba(14, 20, 49, 0.75);
+}
+
 body {
-    /* Imagen de fondo de campus escolar */
-    background-image: url('../images/fondo.jpg');
+    /* Imagen de fondo de campus escolar con overlay translúcido */
+    background-image: linear-gradient(var(--color-prim), var(--color-prim)), url('../images/fondo.jpg');
+    background-color: var(--color-base);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     height: 100vh;
     overflow: hidden;
+}
+
+.scrollbar-none {
+    scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+    display: none;
 }

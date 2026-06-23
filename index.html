@@ -20,28 +20,49 @@
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/index.css">
 </head>
-<body class="p-6 md:p-10 box-border flex flex-col h-screen">
+<body class="p-4 md:p-10 box-border flex flex-col h-screen overflow-hidden">
 
     <!-- Header / Topbar -->
-    <header class="flex justify-between items-center mb-8 shrink-0">
-        <h1 class="text-2xl font-semibold tracking-wide text-white flex items-center gap-3">
-            <i class="ph ph-shield-check text-[var(--color-accent)] text-3xl"></i>
-            Sistema de Incidencias
+    <header class="flex justify-between items-center mb-4 md:mb-8 shrink-0 gap-2">
+        <h1 class="text-lg md:text-2xl font-semibold tracking-wide text-white flex items-center gap-2 md:gap-3 shrink-0">
+            <i class="ph ph-shield-check text-[var(--color-accent)] text-2xl md:text-3xl"></i>
+            <span class="hidden sm:inline">Sistema de Incidencias</span>
+            <span class="sm:hidden">SIGI</span>
         </h1>
-        <div class="flex items-center gap-4 text-sm font-medium">
-            <span class="opacity-80">Ciclo Escolar 2026-2027</span>
+        <div class="flex items-center gap-2 md:gap-4 text-xs md:text-sm font-medium">
+            <span class="opacity-80 hidden sm:inline">Ciclo Escolar 2026-2027</span>
             <div class="h-8 w-8 rounded-full border border-[var(--color-border)] flex items-center justify-center bg-[rgba(0,0,0,0.3)]">
                 <i class="ph ph-user text-[var(--color-accent)]"></i>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Container: Horizontal scroll for left-to-right flow -->
-    <main class="flex-1 overflow-x-auto overflow-y-hidden pb-4 relative">
-        <div class="flex gap-8 w-max h-full items-stretch">
+    <!-- Mobile Tab Selector (Visible only on mobile) -->
+    <div class="md:hidden glass-panel p-1.5 mb-4 shrink-0 flex items-center justify-between gap-1 text-[11px] font-semibold overflow-x-auto scrollbar-none">
+        <button onclick="setActiveTab('nav')" id="tab-nav" class="flex-1 py-2 px-2.5 rounded-lg text-center bg-[rgba(63,163,180,0.15)] border border-[var(--color-border)] text-white whitespace-nowrap flex items-center justify-center gap-1 transition-all">
+            <i class="ph ph-house text-sm"></i>
+            <span>Inicio</span>
+        </button>
+        <button onclick="setActiveTab('registro')" id="tab-registro" class="flex-1 py-2 px-2.5 rounded-lg text-center text-gray-400 hover:text-white whitespace-nowrap flex items-center justify-center gap-1 transition-all">
+            <i class="ph ph-file-plus text-sm"></i>
+            <span>Registro</span>
+        </button>
+        <button onclick="setActiveTab('seguimiento')" id="tab-seguimiento" class="flex-1 py-2 px-2.5 rounded-lg text-center text-gray-400 hover:text-white whitespace-nowrap flex items-center justify-center gap-1 transition-all">
+            <i class="ph ph-warning-circle text-sm"></i>
+            <span>Seguimiento</span>
+        </button>
+        <button onclick="setActiveTab('clinica')" id="tab-clinica" class="flex-1 py-2 px-2.5 rounded-lg text-center text-gray-400 hover:text-white whitespace-nowrap flex items-center justify-center gap-1 transition-all">
+            <i class="ph ph-heartbeat text-sm"></i>
+            <span>Clínica</span>
+        </button>
+    </div>
+
+    <!-- Main Content Container: Horizontal scroll for left-to-right flow on desktop, tabbed switch on mobile -->
+    <main class="flex-1 overflow-x-auto md:overflow-x-auto overflow-y-hidden pb-4 relative">
+        <div class="flex flex-col md:flex-row gap-4 md:gap-8 w-full md:w-max h-full items-stretch">
 
             <!-- 1. BARRA LATERAL (Sidebar) -->
-            <nav class="glass-panel w-64 p-6 flex flex-col justify-between shrink-0 h-full">
+            <nav id="panel-nav" class="glass-panel w-full md:w-64 p-6 flex flex-col justify-between shrink-0 h-full mobile-tab-content">
                 <div class="flex flex-col gap-2">
                     <p class="text-xs font-semibold text-[var(--color-accent)] uppercase tracking-wider mb-4 opacity-80">Navegación</p>
                     
@@ -77,16 +98,16 @@
             </nav>
 
             <!-- 2. PANEL DE REGISTRO (Rol: Maestro/Prefecto) -->
-            <section class="glass-panel w-96 p-8 flex flex-col gap-6 shrink-0 h-full overflow-y-auto">
+            <section id="panel-registro" class="glass-panel w-full md:w-96 p-6 md:p-8 flex flex-col gap-4 md:gap-6 shrink-0 h-full overflow-y-auto mobile-tab-content hidden md:flex">
                 <header class="mb-2">
-                    <h2 class="text-xl font-medium text-white flex items-center gap-2">
+                    <h2 class="text-lg md:text-xl font-medium text-white flex items-center gap-2">
                         <i class="ph ph-file-plus text-[var(--color-accent)]"></i> Nuevo Registro
                     </h2>
-                    <p class="text-sm opacity-70 mt-1">Rol: Maestro / Prefecto</p>
+                    <p class="text-xs md:text-sm opacity-70 mt-1">Rol: Maestro / Prefecto</p>
                 </header>
 
                 <div class="flex flex-col gap-2 relative">
-                    <label class="text-sm opacity-80">Buscar Alumno</label>
+                    <label class="text-xs md:text-sm opacity-80">Buscar Alumno</label>
                     <div class="relative">
                         <i class="ph ph-magnifying-glass absolute left-3 top-3 text-gray-400"></i>
                         <input type="text" placeholder="Nombre o Matrícula..." class="glass-input w-full pl-10 pr-4 py-2.5 text-sm" value="Juan Pérez - MAT8374">
@@ -94,7 +115,7 @@
                 </div>
 
                 <div class="flex flex-col gap-2">
-                    <label class="text-sm opacity-80">Categoría del Reporte</label>
+                    <label class="text-xs md:text-sm opacity-80">Categoría del Reporte</label>
                     <select class="glass-input w-full px-4 py-2.5 text-sm appearance-none relative">
                         <option value="disciplina" selected>Disciplina</option>
                         <option value="instalaciones">Instalaciones</option>
@@ -104,47 +125,47 @@
                 </div>
 
                 <div class="flex flex-col gap-2 flex-1">
-                    <label class="text-sm opacity-80">Descripción Detallada</label>
+                    <label class="text-xs md:text-sm opacity-80">Descripción Detallada</label>
                     <textarea class="glass-input w-full px-4 py-3 text-sm flex-1 resize-none" placeholder="Describe los hechos de manera objetiva..."></textarea>
                 </div>
 
                 <div class="flex flex-col gap-3 mt-4">
-                    <button class="btn-flat w-full py-2.5 flex items-center justify-center gap-2">
+                    <button class="btn-flat w-full py-2.5 flex items-center justify-center gap-2 text-xs md:text-sm">
                         <i class="ph ph-paperclip text-lg"></i> Adjuntar Evidencia
                     </button>
-                    <button class="btn-accent w-full py-3 flex items-center justify-center gap-2 text-[0.95rem]">
+                    <button class="btn-accent w-full py-3 flex items-center justify-center gap-2 text-xs md:text-[0.95rem]">
                         <i class="ph ph-check-circle text-lg"></i> Registrar Incidencia
                     </button>
                 </div>
             </section>
 
             <!-- 3. PANEL DE SEGUIMIENTO (Rol: Servicios Escolares) -->
-            <section class="glass-panel w-[26rem] p-8 flex flex-col gap-6 shrink-0 h-full overflow-y-auto">
+            <section id="panel-seguimiento" class="glass-panel w-full md:w-[26rem] p-6 md:p-8 flex flex-col gap-4 md:gap-6 shrink-0 h-full overflow-y-auto mobile-tab-content hidden md:flex">
                 <header class="mb-2">
-                    <h2 class="text-xl font-medium text-white flex items-center gap-2">
+                    <h2 class="text-lg md:text-xl font-medium text-white flex items-center gap-2">
                         <i class="ph ph-eyes text-[var(--color-accent)]"></i> Seguimiento
                     </h2>
-                    <p class="text-sm opacity-70 mt-1">Rol: Servicios Escolares</p>
+                    <p class="text-xs md:text-sm opacity-70 mt-1">Rol: Servicios Escolares</p>
                 </header>
 
                 <div class="p-4 rounded-lg bg-[rgba(0,0,0,0.2)] border border-[var(--color-border)] flex flex-col gap-3">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="font-medium">Juan Pérez Martínez</p>
+                            <p class="font-medium text-sm md:text-base">Juan Pérez Martínez</p>
                             <p class="text-xs opacity-70 mt-1">Folio: #INC-0842</p>
                         </div>
                         <span class="tag-accent text-xs font-semibold px-2 py-1">NUEVO</span>
                     </div>
-                    <p class="text-sm opacity-80 border-t border-[rgba(255,255,255,0.1)] pt-3 mt-1">
+                    <p class="text-xs md:text-sm opacity-80 border-t border-[rgba(255,255,255,0.1)] pt-3 mt-1">
                         Reporte por indisciplina recurrente en el aula de cómputo.
                     </p>
                 </div>
 
                 <div class="flex flex-col gap-3">
-                    <h3 class="text-sm font-medium opacity-90 flex items-center gap-2">
+                    <h3 class="text-xs md:text-sm font-medium opacity-90 flex items-center gap-2">
                         <i class="ph ph-address-book"></i> Datos del Tutor
                     </h3>
-                    <div class="glass-input p-3 text-sm flex flex-col gap-1">
+                    <div class="glass-input p-3 text-xs md:text-sm flex flex-col gap-1">
                         <p><span class="opacity-60">Nombre:</span> María Martínez (Madre)</p>
                         <p><span class="opacity-60">Tel:</span> +52 55 1234 5678</p>
                         <p><span class="opacity-60">Correo:</span> maria.mtz@correo.com</p>
@@ -152,11 +173,11 @@
                 </div>
 
                 <div class="flex flex-col gap-2 flex-1">
-                    <label class="text-sm opacity-80">Registro de Llamada / Contacto</label>
-                    <textarea class="glass-input w-full px-4 py-3 text-sm h-full resize-none min-h-[5rem]" placeholder="Anotar detalles de la llamada con el tutor..."></textarea>
+                    <label class="text-xs md:text-sm opacity-80">Registro de Llamada / Contacto</label>
+                    <textarea class="glass-input w-full px-4 py-3 text-sm h-full resize-none min-h-[4rem] md:min-h-[5rem]" placeholder="Anotar detalles de la llamada con el tutor..."></textarea>
                 </div>
 
-                <div class="flex gap-3 mt-4">
+                <div class="flex flex-col sm:flex-row gap-3 mt-4">
                     <button class="btn-flat flex-1 py-2.5 flex items-center justify-center gap-2 text-xs" onclick="document.getElementById('psico-modal').classList.remove('hidden')">
                         <i class="ph ph-share-network text-lg"></i> Canalizar a Psicología
                     </button>
@@ -167,26 +188,26 @@
             </section>
 
             <!-- 4. PANEL DE ATENCIÓN CLÍNICA (Rol: Psicología) -->
-            <section class="glass-panel w-96 p-8 flex flex-col gap-6 shrink-0 h-full overflow-y-auto">
+            <section id="panel-clinica" class="glass-panel w-full md:w-96 p-6 md:p-8 flex flex-col gap-4 md:gap-6 shrink-0 h-full overflow-y-auto mobile-tab-content hidden md:flex">
                 <header class="mb-2">
-                    <h2 class="text-xl font-medium text-white flex items-center gap-2">
+                    <h2 class="text-lg md:text-xl font-medium text-white flex items-center gap-2">
                         <i class="ph ph-heartbeat text-[var(--color-accent)]"></i> Atención Clínica
                     </h2>
-                    <p class="text-sm opacity-70 mt-1">Rol: Psicología</p>
+                    <p class="text-xs md:text-sm opacity-70 mt-1">Rol: Psicología</p>
                 </header>
 
                 <div class="flex items-center gap-4 pb-4 border-b border-[var(--color-border)]">
-                    <div class="h-12 w-12 rounded-full bg-[rgba(63,163,180,0.15)] flex items-center justify-center border border-[var(--color-border)]">
-                        <i class="ph ph-user text-2xl text-[var(--color-accent)]"></i>
+                    <div class="h-10 w-10 md:h-12 md:w-12 rounded-full bg-[rgba(63,163,180,0.15)] flex items-center justify-center border border-[var(--color-border)]">
+                        <i class="ph ph-user text-xl md:text-2xl text-[var(--color-accent)]"></i>
                     </div>
                     <div>
-                        <p class="font-medium">Juan Pérez Martínez</p>
+                        <p class="font-medium text-sm md:text-base">Juan Pérez Martínez</p>
                         <p class="text-xs opacity-70">Grado: 2do Secundaria</p>
                     </div>
                 </div>
 
                 <div class="flex flex-col gap-2">
-                    <label class="text-sm opacity-80">Estatus Clínico</label>
+                    <label class="text-xs md:text-sm opacity-80">Estatus Clínico</label>
                     <select class="glass-input w-full px-4 py-2.5 text-sm appearance-none cursor-pointer">
                         <option value="no-iniciado">No Iniciado</option>
                         <option value="en-proceso" selected>En Proceso</option>
@@ -195,15 +216,15 @@
                 </div>
 
                 <div class="flex flex-col gap-2 flex-1">
-                    <label class="text-sm opacity-80">Notas del Expediente (Confidencial)</label>
+                    <label class="text-xs md:text-sm opacity-80">Notas del Expediente (Confidencial)</label>
                     <textarea class="glass-input w-full px-4 py-3 text-sm flex-1 resize-none" placeholder="Registrar observaciones clínicas..."></textarea>
                 </div>
 
                 <div class="flex flex-col gap-3 mt-4">
-                    <button class="btn-flat w-full py-2.5 flex items-center justify-center gap-2">
+                    <button class="btn-flat w-full py-2.5 flex items-center justify-center gap-2 text-xs md:text-sm">
                         <i class="ph ph-calendar-plus text-lg"></i> Programar Cita
                     </button>
-                    <button class="glass-input w-full py-2.5 flex items-center justify-center gap-2 hover:bg-[rgba(255,255,255,0.05)] text-gray-300 transition-colors">
+                    <button class="glass-input w-full py-2.5 flex items-center justify-center gap-2 hover:bg-[rgba(255,255,255,0.05)] text-gray-300 transition-colors text-xs md:text-sm">
                         <i class="ph ph-check-square text-lg"></i> Cerrar Caso Clínico
                     </button>
                 </div>
@@ -213,33 +234,84 @@
     </main>
 
     <!-- MODAL: Canalizar a Psicología (Hidden by default) -->
-    <div id="psico-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-[rgba(0,0,0,0.6)] backdrop-blur-sm p-4">
-        <div class="glass-panel w-full max-w-md p-8 relative">
+    <div id="psico-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-[rgba(0,0,0,0.6)] backdrop-blur-sm p-2 md:p-4">
+        <div class="glass-panel w-full max-w-md p-6 md:p-8 relative">
             <button onclick="document.getElementById('psico-modal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
                 <i class="ph ph-x text-xl"></i>
             </button>
             
-            <h3 class="text-lg font-medium mb-6 text-[var(--color-accent)] flex items-center gap-2">
+            <h3 class="text-base md:text-lg font-medium mb-4 md:mb-6 text-[var(--color-accent)] flex items-center gap-2">
                 <i class="ph ph-share-network"></i> Canalización Psicológica
             </h3>
             
             <div class="flex flex-col gap-4">
                 <div class="flex flex-col gap-2">
-                    <label class="text-sm opacity-80">Motivo de Canalización</label>
+                    <label class="text-xs md:text-sm opacity-80">Motivo de Canalización</label>
                     <textarea class="glass-input w-full px-4 py-2.5 text-sm h-24 resize-none" placeholder="Describe la razón principal de la solicitud..."></textarea>
                 </div>
                 
                 <div class="flex flex-col gap-2">
-                    <label class="text-sm opacity-80">Fecha Sugerida de Atención</label>
+                    <label class="text-xs md:text-sm opacity-80">Fecha Sugerida de Atención</label>
                     <input type="date" class="glass-input w-full px-4 py-2.5 text-sm cursor-pointer" style="color-scheme: dark;">
                 </div>
                 
-                <button class="btn-accent w-full py-3 mt-4 flex items-center justify-center gap-2" onclick="document.getElementById('psico-modal').classList.add('hidden')">
+                <button class="btn-accent w-full py-3 mt-2 flex items-center justify-center gap-2 text-sm" onclick="document.getElementById('psico-modal').classList.add('hidden')">
                     <i class="ph ph-paper-plane-right text-lg"></i> Enviar a Psicología
                 </button>
             </div>
         </div>
     </div>
+
+    <!-- Script para navegación de pestañas en celular y control de viewport -->
+    <script>
+        function setActiveTab(tabId) {
+            // Ocultar todos los paneles en móvil
+            const panels = document.querySelectorAll('.mobile-tab-content');
+            panels.forEach(panel => {
+                panel.classList.add('hidden');
+                panel.classList.remove('flex');
+            });
+            
+            // Mostrar el panel seleccionado
+            const activePanel = document.getElementById('panel-' + tabId);
+            if (activePanel) {
+                activePanel.classList.remove('hidden');
+                activePanel.classList.add('flex');
+            }
+            
+            // Actualizar el estado visual de los botones de pestañas
+            const tabs = ['nav', 'registro', 'seguimiento', 'clinica'];
+            tabs.forEach(t => {
+                const btn = document.getElementById('tab-' + t);
+                if (btn) {
+                    if (t === tabId) {
+                        btn.classList.add('bg-[rgba(63,163,180,0.15)]', 'border', 'border-[var(--color-border)]', 'text-white');
+                        btn.classList.remove('text-gray-400');
+                    } else {
+                        btn.classList.remove('bg-[rgba(63,163,180,0.15)]', 'border', 'border-[var(--color-border)]', 'text-white');
+                        btn.classList.add('text-gray-400');
+                    }
+                }
+            });
+        }
+
+        // Inicializar la pestaña activa según el ancho de pantalla
+        function checkViewport() {
+            if (window.innerWidth < 768) {
+                setActiveTab('nav');
+            } else {
+                // En escritorio, mostrar todos los paneles al mismo tiempo
+                const panels = document.querySelectorAll('.mobile-tab-content');
+                panels.forEach(panel => {
+                    panel.classList.remove('hidden');
+                    panel.classList.add('flex');
+                });
+            }
+        }
+        
+        window.addEventListener('resize', checkViewport);
+        window.addEventListener('DOMContentLoaded', checkViewport);
+    </script>
 
 </body>
 </html>
