@@ -1,0 +1,49 @@
+body {
+    background-image: url('../images/fondo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.glass-panel {
+    border-radius: 16px; /* Override for login panel */
+}
+
+/* Animación Flip 3D */
+.flip-container {
+    perspective: 1200px;
+    width: 100%;
+    max-width: 420px;
+    height: 600px; /* Altura fija para albergar ambos formularios */
+}
+
+.flipper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.flip-container.flipped .flipper {
+    transform: rotateY(180deg);
+}
+
+.front, .back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden; /* Safari */
+}
+
+.back {
+    transform: rotateY(180deg);
+}

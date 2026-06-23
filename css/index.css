@@ -1,0 +1,9 @@
+body {
+    /* Imagen de fondo de campus escolar */
+    background-image: url('../images/fondo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    overflow: hidden;
+}
