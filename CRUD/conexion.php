@@ -1,11 +1,10 @@
 <?php
-/*codigo qye hace la conexion a la base de datos */
-
+/*codigo que hace la conexion a la base de datos */
 
 $servername = "localhost";
 $username = "root"; 
 $password = "";
-$dbname = " sistema_incidencias";
+$dbname = "sistema_incidencias";
 
 // Crear conexión
 $conn = mysqli_connect($servername, $username, $password, $dbname);
